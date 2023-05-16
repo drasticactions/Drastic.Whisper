@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Drastic.Whisper.MauiUI.Pages.WhisperDownloadModelPage"
+             Title="WhisperDownloadModelPage">
+    <Grid RowDefinitions="Auto, *">
+        <Grid>
+            
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15" BindableLayout.ItemsSource="{Binding Downloads}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeShape="RoundRectangle 5" Margin="15" >
+                            <Grid Margin="15" ColumnSpacing="5" ColumnDefinitions="*, *, Auto">
+                                <Grid Margin="5" RowSpacing="5" RowDefinitions="Auto, Auto">
+                                    <Label FontAttributes="Bold" Text="{Binding Model.Name}" />
+                                    <Label Grid.Row="1" FontSize="Caption" Text="{Binding Model.Description}" />
+                                </Grid>
+                                <ProgressBar IsVisible="{Binding DownloadStarted}" Progress="{Binding Precent}" Grid.Column="1" VerticalOptions="Center" />
+                                <Button MinimumWidthRequest="100" IsVisible="{Binding ShowDownloadButton}"  VerticalOptions="Center" Grid.Column="2" Text="Download"  Command="{Binding DownloadCommand}"/>
+                                <Button MinimumWidthRequest="100" IsVisible="{Binding ShowCancelButton}" VerticalOptions="Center" Grid.Column="2" Text="Cancel" BackgroundColor="Red" TextColor="White"  Command="{Binding CancelCommand}"/>
+                                <Button MinimumWidthRequest="100" IsVisible="{Binding ShowDeleteButton}" VerticalOptions="Center" Grid.Column="2" Text="Delete" BackgroundColor="Red" TextColor="White"  Command="{Binding DeleteCommand}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
