@@ -11,4 +11,13 @@ public partial class WhisperDownloadModelPage : ContentPage
     }
 
     public WhisperModelDownloadViewModel Vm;
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+#if WINDOWS
+        Application.Current?.CloseWindow(this.Window);
+#else
+        this.Navigation.PopModalAsync();
+#endif
+    }
 }

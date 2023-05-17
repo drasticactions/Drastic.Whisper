@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
@@ -18,18 +18,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Drastic.Utilities" Version="1.0.10" />
+		<PackageReference Include="Drastic.Utilities" Version="1.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Drastic.Whisper.UI\Drastic.Whisper.UI.csproj" />
-	  <ProjectReference Include="..\Drastic.Whisper\Drastic.Whisper.csproj" />
+		<ProjectReference Include="..\Drastic.Whisper.UI\Drastic.Whisper.UI.csproj" />
+		<ProjectReference Include="..\Drastic.Whisper\Drastic.Whisper.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\WhisperDownloadModelPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Pages\WhisperDownloadModelPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="WinUIEx" Version="1.7.0" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+	</ItemGroup>
 </Project>

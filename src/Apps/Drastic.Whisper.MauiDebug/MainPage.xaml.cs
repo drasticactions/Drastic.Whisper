@@ -1,4 +1,6 @@
-﻿using Drastic.Whisper.MauiUI.Pages;
+﻿using Drastic.Tools;
+using Drastic.Whisper.MauiUI.Pages;
+using Drastic.Whisper.MauiUI.Services;
 
 namespace Drastic.Whisper.MauiDebug;
 
@@ -15,6 +17,7 @@ public partial class MainPage : ContentPage
 
     private void OnCounterClicked(object sender, EventArgs e)
     {
-        this.Navigation.PushModalAsync(new WhisperDownloadModelPage(this.provider));
+        var platform = new DefaultMauiPlatformServices(this.Window);
+        platform.OpenInModalAsync(new WhisperDownloadModelPage(this.provider));
     }
 }

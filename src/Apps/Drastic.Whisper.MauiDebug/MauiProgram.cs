@@ -4,6 +4,10 @@ using Drastic.Whisper.MauiUI.Services;
 using Drastic.Whisper.Services;
 using Drastic.Whisper.UI.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+#if WINDOWS
+using WinUIEx;
+#endif
 
 namespace Drastic.Whisper.MauiDebug;
 
@@ -44,6 +48,22 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+#if WINDOWS
+            builder.ConfigureLifecycleEvents(events =>
+            {
+                events.AddWindows(wndLifeCycleBuilder =>
+                {
+                    wndLifeCycleBuilder.OnWindowCreated(window =>
+                    {
+                        var manager = WinUIEx.WindowManager.Get(window);
+                        manager.Backdrop = new WinUIEx.MicaSystemBackdrop();
+                        manager.MinWidth = 640;
+                        manager.MinHeight = 480;
+                    });
+                });
+            });
+#endif
 
 #if DEBUG
         builder.Logging.AddDebug();

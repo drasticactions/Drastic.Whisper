@@ -120,11 +120,20 @@
   <data name="AppTitle" xml:space="preserve">
     <value>App Title</value>
   </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CaptureStatus" xml:space="preserve">
     <value>Capture Status</value>
   </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="ConvertingAudio" xml:space="preserve">
     <value>Encoding Audio to 16000Hz</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="DownloadButtonLabel" xml:space="preserve">
     <value>Download</value>

@@ -70,6 +70,15 @@ namespace Drastic.Whisper.Translations {
         }
         
         /// <summary>
+        ///   Cancel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Capture Status に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string CaptureStatus {
@@ -79,11 +88,29 @@ namespace Drastic.Whisper.Translations {
         }
         
         /// <summary>
+        ///   Close に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CloseButton {
+            get {
+                return ResourceManager.GetString("CloseButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Encoding Audio to 16000Hz に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ConvertingAudio {
             get {
                 return ResourceManager.GetString("ConvertingAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Delete に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DeleteButton {
+            get {
+                return ResourceManager.GetString("DeleteButton", resourceCulture);
             }
         }
         
