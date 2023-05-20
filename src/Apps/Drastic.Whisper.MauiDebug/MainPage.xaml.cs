@@ -1,4 +1,5 @@
 ﻿using Drastic.Tools;
+using Drastic.Whisper.MauiDebug.ViewModels;
 using Drastic.Whisper.MauiUI.Pages;
 using Drastic.Whisper.MauiUI.Services;
 
@@ -13,7 +14,10 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         this.provider = App.Current!.Handler!.MauiContext!.Services;
+        this.BindingContext = this.ViewModel = new AudioTranscribeDebugViewModel(this.provider);
     }
+
+    public AudioTranscribeDebugViewModel ViewModel { get; }
 
     private void OnCounterClicked(object sender, EventArgs e)
     {

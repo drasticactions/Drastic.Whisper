@@ -54,6 +54,10 @@ namespace Drastic.Whisper.UI.ViewModels
             }
         }
 
+        public IWhisperService Whisper => this.whisper;
+
+        public WhisperModelService ModelService => this.modelService;
+
         public AsyncCommand StartCommand { get; }
 
         public IReadOnlyList<WhisperLanguage> WhisperLanguages { get; }
@@ -148,7 +152,7 @@ namespace Drastic.Whisper.UI.ViewModels
                 {
                     await this.GenerateCaptionsAsync(audioFile, token);
                 },
-                Whisper.Translations.Common.GeneratingSubtitles);
+                Translations.Common.GeneratingSubtitles);
         }
 
         private Task GenerateCaptionsAsync(string audioFile, CancellationToken token)

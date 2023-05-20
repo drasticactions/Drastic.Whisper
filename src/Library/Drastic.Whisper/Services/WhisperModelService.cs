@@ -62,22 +62,25 @@ namespace Drastic.Whisper.Services
         {
             lock (this)
             {
-                this.AvailableModels.Clear();
-                var models = this.AllModels.Where(n => n.Exists);
-                foreach (var model in models)
+                this.dispatcher.Dispatch(() =>
                 {
-                    this.AvailableModels.Add(model);
-                }
+                    this.AvailableModels.Clear();
+                    var models = this.AllModels.Where(n => n.Exists);
+                    foreach (var model in models)
+                    {
+                        this.AvailableModels.Add(model);
+                    }
 
-                if (this.SelectedModel is null)
-                {
-                    return;
-                }
+                    if (this.SelectedModel is null)
+                    {
+                        return;
+                    }
 
-                if (!this.AvailableModels.Contains(this.SelectedModel))
-                {
-                    this.SelectedModel = null;
-                }
+                    if (!this.AvailableModels.Contains(this.SelectedModel))
+                    {
+                        this.SelectedModel = null;
+                    }
+                });
             }
 
             this.OnAvailableModelsUpdate?.Invoke(this, EventArgs.Empty);

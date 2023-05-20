@@ -39,12 +39,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Platforms\" />
-	  <None Remove="Platforms\iOS\" />
-	  <None Remove="Platforms\Android\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Platforms\" />
-	  <Folder Include="Platforms\iOS\" />
-	  <Folder Include="Platforms\Android\" />
 	</ItemGroup>
 </Project>

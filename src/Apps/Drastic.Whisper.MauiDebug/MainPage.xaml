@@ -3,20 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Drastic.Whisper.MauiDebug.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <Grid Margin="15"
+          RowSpacing="5"
+          RowDefinitions="Auto, Auto, *">
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+        <Grid Grid.Row="0" RowDefinitions="50, Auto, 50, Auto, Auto" RowSpacing="5">
+            <Picker ItemsSource="{Binding ModelService.AvailableModels}" SelectedItem="{Binding ModelService.SelectedModel, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}"/>
+            <Button Grid.Row="1" Text="Download Model" Clicked="OnCounterClicked" />
+            <Button Grid.Row="3" Text="Record" Command="{Binding RecordCommand}"/>
+        </Grid>
 
-        </VerticalStackLayout>
-    </ScrollView>
+        <ListView HasUnevenRows="True" Grid.Row="2" ItemsSource="{Binding Subtitles}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowDefinitions="*, Auto">
+                            <Label Text="{Binding Text}" />
+                            <Label FontSize="Caption" Grid.Row="1" Text="{Binding Time}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 
 </ContentPage>
