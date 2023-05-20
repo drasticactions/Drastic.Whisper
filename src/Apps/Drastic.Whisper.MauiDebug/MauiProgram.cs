@@ -21,7 +21,13 @@ public static class MauiProgram
         Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("ButtonChange", (handler, view) =>
         {
             handler.PlatformView.PreferredBehavioralStyle = UIKit.UIBehavioralStyle.Pad;
-            handler.PlatformView.Layer.CornerRadius = 10;
+            handler.PlatformView.Layer.CornerRadius = 5;
+            handler.PlatformView.ClipsToBounds = true;
+        });
+#elif IOS
+        Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("ButtonChange", (handler, view) =>
+        {
+            handler.PlatformView.Layer.CornerRadius = 5;
             handler.PlatformView.ClipsToBounds = true;
         });
 #endif
