@@ -71,15 +71,12 @@ namespace Drastic.Whisper.Services
                         this.AvailableModels.Add(model);
                     }
 
-                    if (this.SelectedModel is null)
-                    {
-                        return;
-                    }
-
-                    if (!this.AvailableModels.Contains(this.SelectedModel))
+                    if (this.SelectedModel is not null && !this.AvailableModels.Contains(this.SelectedModel))
                     {
                         this.SelectedModel = null;
                     }
+
+                    this.SelectedModel ??= this.AvailableModels.FirstOrDefault();
                 });
             }
 
