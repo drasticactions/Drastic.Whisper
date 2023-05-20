@@ -17,9 +17,12 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
 #if MACCATALYST
+        DrasticForbiddenControls.CatalystControls.AllowsUnsupportedMacIdiomBehavior();
         Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("ButtonChange", (handler, view) =>
         {
             handler.PlatformView.PreferredBehavioralStyle = UIKit.UIBehavioralStyle.Pad;
+            handler.PlatformView.Layer.CornerRadius = 10;
+            handler.PlatformView.ClipsToBounds = true;
         });
 #endif
 
