@@ -13,7 +13,7 @@
             <VerticalStackLayout Spacing="5" BindableLayout.ItemsSource="{Binding Downloads}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <ui:AcrylicView CornerRadius="10" EffectStyle="Custom" TintColor="Black" TintOpacity=".7"  Margin="5" >
+                        <ui:AcrylicView CornerRadius="10" EffectStyle="Custom" TintColor="Black" TintOpacity=".85"  Margin="5" >
                             <Grid Margin="15" ColumnSpacing="5" ColumnDefinitions="*, *, Auto">
                                 <Grid Margin="5" RowSpacing="5" RowDefinitions="Auto, Auto">
                                     <Label FontAttributes="Bold" Text="{Binding Model.Name}" />
