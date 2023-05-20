@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Drastic.Whisper.MauiUI.Pages.WhisperDownloadModelPage"
              xmlns:translations="clr-namespace:Drastic.Whisper.Translations;assembly=Drastic.Whisper"
+             xmlns:ui="clr-namespace:Xe.AcrylicView;assembly=Xe.AcrylicView" 
              Title="WhisperDownloadModelPage">
-    <Grid RowDefinitions="Auto, *, Auto">
-        <Grid Margin="15">
-            <Label Text="{x:Static translations:Common.WhisperModelHeader}" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" />
-        </Grid>
-        <ScrollView Grid.Row="1">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid Margin="15">
+                <Label Text="{x:Static translations:Common.WhisperModelHeader}" FontSize="Title" VerticalOptions="Center" HorizontalOptions="Center" />
+            </Grid>
             <VerticalStackLayout Spacing="5" BindableLayout.ItemsSource="{Binding Downloads}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Border StrokeShape="RoundRectangle 5" Margin="5" >
+                        <ui:AcrylicView CornerRadius="10" EffectStyle="Custom" TintColor="Black" TintOpacity=".7"  Margin="5" >
                             <Grid Margin="15" ColumnSpacing="5" ColumnDefinitions="*, *, Auto">
                                 <Grid Margin="5" RowSpacing="5" RowDefinitions="Auto, Auto">
                                     <Label FontAttributes="Bold" Text="{Binding Model.Name}" />
@@ -23,13 +24,13 @@
                                 <Button MinimumWidthRequest="100" IsVisible="{Binding ShowCancelButton}" VerticalOptions="Center" Grid.Column="2" Text="{x:Static translations:Common.CancelButton}" BackgroundColor="Red" TextColor="White"  Command="{Binding CancelCommand}"/>
                                 <Button MinimumWidthRequest="100" IsVisible="{Binding ShowDeleteButton}" VerticalOptions="Center" Grid.Column="2" Text="{x:Static translations:Common.DeleteButton}" BackgroundColor="Red" TextColor="White"  Command="{Binding DeleteCommand}"/>
                             </Grid>
-                        </Border>
+                        </ui:AcrylicView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
-        </ScrollView>
-        <Grid Margin="15" Grid.Row="2">
-            <Button VerticalOptions="Center" HorizontalOptions="Center" Text="{x:Static translations:Common.CloseButton}" Clicked="Button_Clicked"/>
-        </Grid>
-    </Grid>
+            <Grid Margin="15">
+                <Button VerticalOptions="Center" HorizontalOptions="Center" Text="{x:Static translations:Common.CloseButton}" Clicked="Button_Clicked"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

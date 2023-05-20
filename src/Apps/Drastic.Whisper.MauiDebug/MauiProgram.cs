@@ -5,6 +5,7 @@ using Drastic.Whisper.Services;
 using Drastic.Whisper.UI.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using Xe.AcrylicView;
 #if WINDOWS
 using WinUIEx;
 #endif
@@ -43,6 +44,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseAcrylicView()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

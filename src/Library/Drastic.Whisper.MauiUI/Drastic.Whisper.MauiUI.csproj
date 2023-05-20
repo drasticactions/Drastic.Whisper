@@ -21,6 +21,7 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="AcrylicView.Maui" Version="1.13.0" />
 		<PackageReference Include="Drastic.Utilities" Version="1.0.10" />
 	</ItemGroup>
 
