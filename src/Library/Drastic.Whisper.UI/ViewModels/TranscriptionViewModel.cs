@@ -111,6 +111,8 @@ namespace Drastic.Whisper.UI.ViewModels
 
         private async Task StartAsync()
         {
+            this.Subtitles.Clear();
+
             ArgumentNullException.ThrowIfNull(nameof(this.UrlField));
             ArgumentNullException.ThrowIfNull(nameof(this.modelService.SelectedModel));
 
@@ -174,7 +176,7 @@ namespace Drastic.Whisper.UI.ViewModels
             var e = segment.Segment;
             this.diagLogger?.LogDebug($"CSSS {e.Start} ==> {e.End} : {e.Text}");
 
-            var item = new SrtSubtitleLine() { Start = e.Start, End = e.End, Text = e.Text, LineNumber = this.Subtitles.Count() + 1 };
+            var item = new SrtSubtitleLine() { Start = e.Start, End = e.End, Text = e.Text.Trim(), LineNumber = this.Subtitles.Count() + 1 };
 
             this.Dispatcher.Dispatch(() => this.Subtitles.Add(item));
         }

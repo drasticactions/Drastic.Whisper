@@ -1,6 +1,8 @@
 using Drastic.Whisper.UI.ViewModels;
 using Microsoft.Maui.Controls.PlatformConfiguration;
+#if IOS || MACCATALYST
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+#endif
 
 namespace Drastic.Whisper.MauiUI.Pages;
 
@@ -10,7 +12,9 @@ public partial class WhisperDownloadModelPage : ContentPage
     {
         InitializeComponent();
         this.BindingContext = this.Vm = provider.GetRequiredService<WhisperModelDownloadViewModel>();
+#if IOS || MACCATALYST
         On<iOS>().SetModalPresentationStyle(UIModalPresentationStyle.FormSheet);
+#endif
     }
 
     public WhisperModelDownloadViewModel Vm;

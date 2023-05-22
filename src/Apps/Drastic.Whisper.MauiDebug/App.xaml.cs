@@ -2,10 +2,10 @@
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public App(IServiceProvider provider)
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        MainPage = new MainPage(provider);
+    }
 }
