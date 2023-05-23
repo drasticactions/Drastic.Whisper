@@ -15,10 +15,8 @@
 		<PackageVersion Include="Whisper.net.Runtime" Version="1.4.2" />
 		<PackageVersion Include="Downloader" Version="3.0.4" />
 		<PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
-		<PackageVersion Include="Whisper.net" Version="1.4.2" />
 		<PackageVersion Include="YoutubeExplode" Version="6.2.14" />
 		<PackageVersion Include="Xabe.FFmpeg" Version="5.2.6" />
-		<PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
 		<PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
         <PackageVersion Include="LibVLCSharp" Version="3.7.0" />
         <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
