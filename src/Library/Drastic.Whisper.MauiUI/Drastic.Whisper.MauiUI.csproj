@@ -21,8 +21,9 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="AcrylicView.Maui" Version="1.13.0" />
-		<PackageReference Include="Drastic.Utilities" Version="1.0.10" />
+		<PackageReference Include="AcrylicView.Maui" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+		<PackageReference Include="Drastic.Utilities" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,7 +37,7 @@
 		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="WinUIEx" Version="1.7.0" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<PackageReference Include="WinUIEx" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Platforms\" />

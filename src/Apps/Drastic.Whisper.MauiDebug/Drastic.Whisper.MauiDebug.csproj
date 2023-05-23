@@ -52,11 +52,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AcrylicView.Maui" Version="1.13.0" />
-		<PackageReference Include="Drastic.AudioRecorder" Version="1.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Whisper.net" Version="1.4.2" />
-		<PackageReference Include="Whisper.net.Runtime" Version="1.4.2" />
+		<PackageReference Include="AcrylicView.Maui" />
+		<PackageReference Include="Drastic.AudioRecorder" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+		<PackageReference Include="Whisper.net" />
+		<PackageReference Include="Whisper.net.Runtime" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,18 +68,18 @@
 		<ProjectReference Include="..\..\Library\Drastic.Whisper\Drastic.Whisper.csproj" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
-		<PackageReference Include="VideoLAN.LibVLC.Android" Version="3.5.3" />
+		<PackageReference Include="VideoLAN.LibVLC.Android" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
-		<PackageReference Include="VideoLAN.LibVLC.iOS" Version="3.3.18" />
+		<PackageReference Include="VideoLAN.LibVLC.iOS" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="WinUIEx" Version="1.7.0" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
+		<PackageReference Include="WinUIEx" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Remove="Platforms\Android\AndroidMicrophoneService.cs" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
-	  <PackageReference Include="Drastic.ForbiddenControls" Version="1.5.2" />
+	  <PackageReference Include="Drastic.ForbiddenControls" />
 	</ItemGroup>
 </Project>
