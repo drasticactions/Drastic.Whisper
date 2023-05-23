@@ -41,6 +41,7 @@ namespace Drastic.Whisper.UI.ViewModels
             this.selectedLanguage = this.WhisperLanguages[0];
             this.cts = new CancellationTokenSource();
             this.StartCommand = new AsyncCommand(this.StartAsync, () => this.canStart, this.Dispatcher, this.ErrorHandler);
+            this.ExportCommand = new AsyncCommand<string>(this.ExportAsync, null, this.ErrorHandler);
         }
 
         public TranscriptionViewModel(string srtText, IServiceProvider services)
@@ -59,6 +60,8 @@ namespace Drastic.Whisper.UI.ViewModels
         public WhisperModelService ModelService => this.modelService;
 
         public AsyncCommand StartCommand { get; }
+
+        public AsyncCommand<string> ExportCommand { get; }
 
         public IReadOnlyList<WhisperLanguage> WhisperLanguages { get; }
 
@@ -203,6 +206,22 @@ namespace Drastic.Whisper.UI.ViewModels
         private void ModelServiceOnAvailableModelsUpdate(object? sender, EventArgs e)
         {
             this.RaiseCanExecuteChanged();
+        }
+
+        private async Task ExportAsync(string filePath)
+        {
+            if (!this.Subtitles.Any())
+            {
+                return;
+            }
+
+            var subtitle = new SrtSubtitle();
+            foreach (var item in this.Subtitles)
+            {
+                subtitle.Lines.Add(item);
+            }
+
+            await File.WriteAllTextAsync(filePath, subtitle.ToString());
         }
     }
 }
