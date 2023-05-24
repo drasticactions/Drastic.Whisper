@@ -55,7 +55,7 @@ internal class Program
         var srtPath = Path.Combine(WhisperStatic.DefaultPath, "srt");
         Directory.CreateDirectory(srtPath);
 
-        whisperService.InitModel(model.FileLocation, languages[0]);
+        whisperService.InitModel(model.FileLocation, languages.First(n => n.LanguageCode == "en"));
 
         var transcodeService = Ioc.Default.GetRequiredService<ITranscodeService>();
 
