@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" />
+		<PackageReference Include="Drastic.Utilities" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Sharprompt" />
+		<PackageReference Include="Whisper.net" />
+		<PackageReference Include="Whisper.net.Runtime" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Library\Drastic.Media\Drastic.Media.csproj" />
+		<ProjectReference Include="..\..\Library\Drastic.Whisper.FFMpeg\Drastic.Whisper.FFMpeg.csproj" />
+		<ProjectReference Include="..\..\Library\Drastic.Whisper\Drastic.Whisper.csproj" />
+	</ItemGroup>
+
+</Project>

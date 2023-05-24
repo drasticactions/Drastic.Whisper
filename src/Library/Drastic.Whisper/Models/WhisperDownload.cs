@@ -54,6 +54,8 @@ namespace Drastic.Whisper.Models
 
         public WhisperModel Model { get; private set; }
 
+        public DownloadService DownloadService => this.download;
+
         public double Precent
         {
             get { return this.precent; }

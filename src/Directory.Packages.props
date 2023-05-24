@@ -3,22 +3,25 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
-  	<ItemGroup>
-    	<PackageVersion Include="VideoLAN.LibVLC.Android" Version="3.5.3" />
-		<PackageVersion Include="VideoLAN.LibVLC.iOS" Version="3.3.18" />
-		<PackageVersion Include="WinUIEx" Version="1.7.0" />
-		<PackageVersion Include="Drastic.ForbiddenControls" Version="1.5.2" />
-		<PackageVersion Include="AcrylicView.Maui" Version="1.13.0" />
-		<PackageVersion Include="Drastic.AudioRecorder" Version="1.0.2" />
-		<PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageVersion Include="Whisper.net" Version="1.4.2" />
-		<PackageVersion Include="Whisper.net.Runtime" Version="1.4.2" />
-		<PackageVersion Include="Downloader" Version="3.0.4" />
-		<PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
-		<PackageVersion Include="YoutubeExplode" Version="6.2.14" />
-		<PackageVersion Include="Xabe.FFmpeg" Version="5.2.6" />
-		<PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
-        <PackageVersion Include="LibVLCSharp" Version="3.7.0" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-  	</ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageVersion Include="Sharprompt" Version="2.4.5" />
+    <PackageVersion Include="VideoLAN.LibVLC.Android" Version="3.5.3" />
+    <PackageVersion Include="VideoLAN.LibVLC.iOS" Version="3.3.18" />
+    <PackageVersion Include="WinUIEx" Version="1.7.0" />
+    <PackageVersion Include="Drastic.ForbiddenControls" Version="1.5.2" />
+    <PackageVersion Include="AcrylicView.Maui" Version="1.13.0" />
+    <PackageVersion Include="Drastic.AudioRecorder" Version="1.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+    <PackageVersion Include="Whisper.net" Version="1.4.2" />
+    <PackageVersion Include="Whisper.net.Runtime" Version="1.4.2" />
+    <PackageVersion Include="Downloader" Version="3.0.4" />
+    <PackageVersion Include="Drastic.Utilities" Version="1.0.10" />
+    <PackageVersion Include="YoutubeExplode" Version="6.2.14" />
+    <PackageVersion Include="Xabe.FFmpeg" Version="5.2.6" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
+    <PackageVersion Include="LibVLCSharp" Version="3.7.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+  </ItemGroup>
 </Project>
