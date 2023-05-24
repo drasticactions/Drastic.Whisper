@@ -19,13 +19,13 @@ internal class Program
     {
         Console.Clear();
         Console.WriteLine("Drastic.PodcastWhisper");
-
+        var generatedFilename = "generated";
         Ioc.Default.ConfigureServices(
                new ServiceCollection()
                .AddSingleton<IErrorHandlerService>(new BasicErrorHandler())
                .AddSingleton<IAppDispatcher>(new AppDispatcher())
                .AddTransient<IWhisperService, DefaultWhisperService>()
-               .AddSingleton<ITranscodeService, FFMpegTranscodeService>()
+               .AddSingleton<ITranscodeService>(new FFMpegTranscodeService(WhisperStatic.DefaultPath, generatedFilename))
                .AddSingleton<WhisperModelService>()
                .BuildServiceProvider());
 
@@ -92,8 +92,6 @@ internal class Program
 
                 await File.WriteAllTextAsync(srtFile, subtitle.ToString());
             }
-
-            File.Delete(audio);
         }
     }
 
