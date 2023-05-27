@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -12,11 +12,11 @@
 		<PackageReference Include="Drastic.Utilities" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Sharprompt" />
-		<PackageReference Include="Whisper.net" />
 		<PackageReference Include="Whisper.net.Runtime" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Media\Drastic.Media.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Whisper.FFMpeg\Drastic.Whisper.FFMpeg.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Whisper\Drastic.Whisper.csproj" />

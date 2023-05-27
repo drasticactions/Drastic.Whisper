@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{DD2681A5-17E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drastic.PodcastWhisper", "Apps\Drastic.PodcastWhisper\Drastic.PodcastWhisper.csproj", "{E7AFD5FF-B38D-4621-A64E-522D9990CB11}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{EFB7141F-94F3-4F52-8F74-4BA907159185}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whisper.net", "..\external\whisper.net\Whisper.net\Whisper.net.csproj", "{F255241A-C275-4CD4-9A9B-1B1EE78AD227}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +78,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{458CB45F-8613-421A-BECE-1686A3D2BCD4} = {C8074A77-C193-45CD-A05B-D6C82DDF9292}
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11} = {DD2681A5-17E6-4952-B354-BBF7AF7B49EE}
+		{F255241A-C275-4CD4-9A9B-1B1EE78AD227} = {EFB7141F-94F3-4F52-8F74-4BA907159185}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF18DEB7-2E2D-44FF-BAE2-960D46043A7C}

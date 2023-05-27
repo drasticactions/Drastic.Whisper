@@ -55,13 +55,13 @@
 		<PackageReference Include="AcrylicView.Maui" />
 		<PackageReference Include="Drastic.AudioRecorder" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
-		<PackageReference Include="Whisper.net" />
 		<PackageReference Include="Whisper.net.Runtime" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Whisper.FFMpeg\Drastic.Whisper.FFMpeg.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Whisper.MauiUI\Drastic.Whisper.MauiUI.csproj" />
 		<ProjectReference Include="..\..\Library\Drastic.Whisper.UI\Drastic.Whisper.UI.csproj" />
