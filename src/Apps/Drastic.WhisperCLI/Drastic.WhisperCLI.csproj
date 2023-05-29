@@ -12,6 +12,8 @@
     <PackageReference Include="Drastic.Utilities" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Sharprompt" />
+    <PackageReference Include="System.CommandLine"/>
+		<PackageReference Include="System.CommandLine.DragonFruit" />
   </ItemGroup>
 
   <ItemGroup>
