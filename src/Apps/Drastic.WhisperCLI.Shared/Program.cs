@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using Drastic.Media.Core.Model;
 using Drastic.Media.Core.Model.Feeds;
 using Drastic.Media.Core.Services;
 using Drastic.Services;
@@ -76,16 +77,59 @@ internal class MainProgram
         filesCommand.Add(localModelOption);
         filesCommand.Add(localLanguageOption);
         filesCommand.Add(new Option<List<string>>("--file", "Local file"));
+
+        var podcastCommand = new Command("podcast")
+        {
+            Handler = CommandHandler.Create(Podcast),
+        };
+
+        podcastCommand.Add(localModelOption);
+        podcastCommand.Add(localLanguageOption);
+        podcastCommand.Add(new Option<string>("--rss", "Podcast RSS URL"));
+
         this.root = new RootCommand
         {
             filesCommand,
+            podcastCommand,
         };
 
         // Set the default command handler
+        #if DEBUG
         this.root.Handler = CommandHandler.Create(LocalFiles);
+        #endif
     }
 
-    public async Task LocalFiles(string model, string languageCode, List<string> file)
+    private async Task Podcast(string model, string languageCode, string rss)
+    {
+        model = await this.GetModelPrompt(model);
+        var language = this.GetLanguagePrompt(languageCode);
+        if (string.IsNullOrEmpty(rss))
+        {
+            rss = Prompt.Input<string>("Enter RSS feed");
+        }
+
+        var podcast = await this.GetPodcastAsync(rss);
+        Console.WriteLine(podcast!.Title);
+
+        foreach (var item in podcast.Episodes)
+        {
+            Console.WriteLine(item.Title);
+            await this.RunModelAsync(
+                model,
+                language,
+                item.OnlinePath?.ToString() ?? throw new NullReferenceException(nameof(item.OnlinePath)),
+                item.Title);
+        }
+    }
+
+    private async Task<PodcastShowItem> GetPodcastAsync(string rssFeedUrl)
+    {
+        var podcastService = new PodcastService();
+        return await podcastService.FetchPodcastShowAsync(new Uri(rssFeedUrl), this.cts.Token) ??
+               throw new NullReferenceException(nameof(rssFeedUrl));
+    }
+
+    private async Task LocalFiles(string model, string languageCode, List<string> file)
     {
         model = await this.GetModelPrompt(model);
         var language = this.GetLanguagePrompt(languageCode);
@@ -102,16 +146,11 @@ internal class MainProgram
         return await this.root.InvokeAsync(this.args);
     }
 
-    private async Task RunModelAsync(string modelPath, WhisperLanguage language, string filePath)
+    private async Task RunModelAsync(string modelPath, WhisperLanguage language, string path, string? filename = null)
     {
         if (!File.Exists(modelPath))
         {
             throw new ArgumentNullException("Model does not exist");
-        }
-
-        if (!File.Exists(filePath))
-        {
-            throw new ArgumentNullException("File does not exist");
         }
 
         var srtPath = Path.Combine(WhisperStatic.DefaultPath, "srt");
@@ -122,14 +161,14 @@ internal class MainProgram
             this.whisperService.InitModel(modelPath, language);
         }
 
-        var audio = await this.transcodeService.ProcessFile(filePath);
+        var audio = await this.transcodeService.ProcessFile(path);
         if (string.IsNullOrEmpty(audio) || !File.Exists(audio))
         {
-            throw new ArgumentNullException($"Could not generate audio file: {filePath}");
+            throw new ArgumentNullException($"Could not generate audio file: {path}");
         }
 
         var srtFile = Path.Combine(srtPath,
-            ConvertToValidFilename(Path.GetFileNameWithoutExtension(filePath)) +
+            ConvertToValidFilename(filename ?? Path.GetFileNameWithoutExtension(path)) +
             $"_{Path.GetFileNameWithoutExtension(modelPath)}_{driverType}.srt");
 
         using StreamWriter writer = new StreamWriter(srtFile);
@@ -157,7 +196,7 @@ internal class MainProgram
         }
 
         this.whisperService.OnNewWhisperSegment += WhisperServiceOnOnNewWhisperSegment;
-        await this.whisperService.ProcessAsync(audio, CancellationToken.None);
+        await this.whisperService.ProcessAsync(audio, this.cts.Token);
         this.whisperService.OnNewWhisperSegment -= WhisperServiceOnOnNewWhisperSegment;
         stopwatch.Stop();
         Console.WriteLine(stopwatch.Elapsed);
@@ -195,19 +234,20 @@ internal class MainProgram
             return modelPath;
         }
 
-        var modelService = Ioc.Default.GetRequiredService<WhisperModelService>();
-        var model = Prompt.Select("Select a model", modelService.AllModels, textSelector: (item) => item.Name);
-        if (!model.Exists)
+        var model = Prompt.Select("Select a model", this.modelService.AllModels, textSelector: (item) => item.Name);
+        if (model.Exists)
         {
-            Console.WriteLine("Downloading Model...");
-            var whisperDownloader =
-                new WhisperDownload(model, modelService, Ioc.Default.GetRequiredService<IAppDispatcher>());
-            whisperDownloader.DownloadService.DownloadProgressChanged += (s, e) =>
-            {
-                //progressBar.Update((int)e.ProgressPercentage);
-            };
-            await whisperDownloader.DownloadCommand.ExecuteAsync();
+            return model.FileLocation;
         }
+
+        Console.WriteLine("Downloading Model...");
+        var whisperDownloader =
+            new WhisperDownload(model, this.modelService, Ioc.Default.GetRequiredService<IAppDispatcher>());
+        whisperDownloader.DownloadService.DownloadProgressChanged += (s, e) =>
+        {
+            //progressBar.Update((int)e.ProgressPercentage);
+        };
+        await whisperDownloader.DownloadCommand.ExecuteAsync();
 
         return model.FileLocation;
     }
