@@ -1,6 +1,0 @@
-[submodule "external/whisper.net"]
-	path = external/whisper.net
-	url = git@github.com:drasticactions/whisper.net.git
-[submodule "external/Whisper.net.Runtimes"]
-	path = external/Whisper.net.Runtimes
-	url = git@github.com:drasticactions/Whisper.net.Runtimes.git
