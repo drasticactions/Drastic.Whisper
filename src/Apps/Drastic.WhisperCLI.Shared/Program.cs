@@ -87,10 +87,18 @@ internal class MainProgram
         podcastCommand.Add(localLanguageOption);
         podcastCommand.Add(new Option<string>("--rss", "Podcast RSS URL"));
 
+        var benchmarkCommand = new Command("benchmark")
+        {
+            Handler = CommandHandler.Create(Benchmark)
+        };
+
+        benchmarkCommand.Add(new Option<string>("--modelFolder", "Whisper GGML Model Folder"));
+        benchmarkCommand.Add(localLanguageOption);
         this.root = new RootCommand
         {
             filesCommand,
             podcastCommand,
+            benchmarkCommand,
         };
     }
 
@@ -136,6 +144,27 @@ internal class MainProgram
         }
     }
 
+    private async Task Benchmark(string modelFolder, string languageCode)
+    {
+        var language = this.GetLanguagePrompt(languageCode);
+        if (string.IsNullOrEmpty(modelFolder))
+        {
+            modelFolder = Prompt.Input<string>("Enter Model Path",
+                defaultValue: Path.Combine(WhisperStatic.DefaultPath, "classic"));
+        }
+
+        var files = Directory.GetFiles(modelFolder, "*.bin");
+
+        var file = Prompt.Input<string>("Enter File Path",
+            defaultValue: Path.Combine(WhisperStatic.DefaultPath, "generated.wav"));
+
+        foreach (var model in files)
+        {
+            var baseDirectory = Path.GetFileName(Path.GetDirectoryName(model));
+            await this.RunModelAsync(model, language, file, $"{Path.GetFileNameWithoutExtension(file)}-{baseDirectory}");
+        }
+    }
+
     public async Task<int> RunAsync()
     {
         return await this.root.InvokeAsync(this.args);
@@ -151,10 +180,7 @@ internal class MainProgram
         var srtPath = Path.Combine(WhisperStatic.DefaultPath, "srt");
         Directory.CreateDirectory(srtPath);
 
-        if (!this.whisperService.IsInitialized)
-        {
-            this.whisperService.InitModel(modelPath, language);
-        }
+        this.whisperService.InitModel(modelPath, language);
 
         var audio = await this.transcodeService.ProcessFile(path);
         if (string.IsNullOrEmpty(audio) || !File.Exists(audio))

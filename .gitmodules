@@ -1,0 +1,3 @@
+[submodule "external/whisper.net"]
+	path = external/whisper.net
+	url = git@github.com:drasticactions/whisper.net.git

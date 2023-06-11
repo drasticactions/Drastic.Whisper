@@ -32,6 +32,7 @@ namespace Drastic.Whisper.Services
 
         public void InitModel(string path, WhisperLanguage language)
         {
+            this.processor?.Dispose();
             this.factory = WhisperFactory.FromPath(path);
             this.processor = this.SetupProcessor(this.factory, language);
         }

@@ -1,4 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Condition="$([MSBuild]::IsOSPlatform('osx')) == false" Project="..\..\..\external\Whisper.net\Whisper.net.Runtime\Whisper.net.Runtime.targets" />
+	<Import Condition="$([MSBuild]::IsOSPlatform('osx'))" Project="..\..\..\external\Whisper.net\Whisper.net.Runtime.CoreML\Whisper.net.Runtime.CoreML.targets" />
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -56,15 +58,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-		<PackageReference Include="Whisper.net" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx'))">
-		<PackageReference Include="Whisper.net.Runtime.CoreML"/>
-	</ItemGroup>
-
-	<ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx')) == false">
-		<PackageReference Include="Whisper.net.Runtime"/>
+		<ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

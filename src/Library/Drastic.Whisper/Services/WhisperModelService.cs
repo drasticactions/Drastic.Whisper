@@ -27,7 +27,10 @@ namespace Drastic.Whisper.Services
             this.dispatcher = provider.GetRequiredService<IAppDispatcher>();
             foreach (var item in Enum.GetValues(typeof(GgmlType)))
             {
-                this.AllModels.Add(new WhisperModel((GgmlType)item));
+                foreach (var qantizationType in Enum.GetValues(typeof(QuantizationType)))
+                {
+                    this.AllModels.Add(new WhisperModel((GgmlType)item, (QuantizationType)qantizationType));
+                }
             }
 
             this.UpdateAvailableModels();

@@ -13,7 +13,7 @@
 		<PackageReference Include="Sharprompt" />
 		<PackageReference Include="System.CommandLine"/>
 		<PackageReference Include="System.CommandLine.DragonFruit" />
-		<PackageReference Include="Whisper.net" />
+		<ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx'))">

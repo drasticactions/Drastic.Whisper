@@ -17,16 +17,17 @@ namespace Drastic.Whisper.Models
         {
         }
 
-        public WhisperModel(GgmlType type)
+        public WhisperModel(GgmlType type, QuantizationType quantizationType)
         {
             this.GgmlType = type;
-            this.Name = type.ToString();
+            this.QuantizationType = quantizationType;
+            this.Name = $"{type.ToString()} - {quantizationType}";
             this.Type = WhisperModelType.Standard;
-            this.FileLocation = System.IO.Path.Combine(WhisperStatic.DefaultPath, type.ToFilename());
-            this.DownloadUrl = type.ToDownloadUrl();
+            this.FileLocation = WhisperStatic.GetModelPath(type, quantizationType);
+            this.DownloadUrl = type.ToDownloadUrl(quantizationType);
 
             // TODO: Add descriptions
-            this.Description = type switch
+            var modelDescription = type switch
             {
                 GgmlType.Tiny => "Tiny model trained on 1.5M samples",
                 GgmlType.TinyEn => "Tiny model trained on 1.5M samples (English)",
@@ -40,6 +41,8 @@ namespace Drastic.Whisper.Models
                 GgmlType.Large => "Large model trained on 1.5M samples",
                 _ => throw new NotImplementedException(),
             };
+
+            this.Description = $"{modelDescription} - {quantizationType}";
         }
 
         public WhisperModel(string path)
@@ -57,6 +60,8 @@ namespace Drastic.Whisper.Models
         public WhisperModelType Type { get; set; }
 
         public GgmlType GgmlType { get; set; }
+        
+        public QuantizationType QuantizationType { get; set; }
 
         public string Name { get; set; } = string.Empty;
 

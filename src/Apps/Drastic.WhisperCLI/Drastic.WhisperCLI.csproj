@@ -1,4 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Condition="$([MSBuild]::IsOSPlatform('osx')) == false" Project="..\..\..\external\Whisper.net\Whisper.net.Runtime\Whisper.net.Runtime.targets" />
+  <Import Condition="$([MSBuild]::IsOSPlatform('osx'))" Project="..\..\..\external\Whisper.net\Whisper.net.Runtime.CoreML\Whisper.net.Runtime.CoreML.targets" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
@@ -13,18 +15,10 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Sharprompt" />
     <PackageReference Include="System.CommandLine"/>
-		<PackageReference Include="System.CommandLine.DragonFruit" />
-    <PackageReference Include="Whisper.net" />
+    <PackageReference Include="System.CommandLine.DragonFruit" />
+    <ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
   </ItemGroup>
 
-    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx'))">
-        <PackageReference Include="Whisper.net.Runtime.CoreML"/>
-    </ItemGroup>
-
-    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx')) == false">
-        <PackageReference Include="Whisper.net.Runtime"/>
-    </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Drastic.Media\Drastic.Media.csproj" />
     <ProjectReference Include="..\..\Library\Drastic.Whisper.FFMpeg\Drastic.Whisper.FFMpeg.csproj" />

@@ -10,20 +10,15 @@ namespace Drastic.Whisper
     {
         public static string DefaultPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Drastic.Whisper");
 
-        public static string ToDownloadUrl(this GgmlType type) => type switch
+        public static string ToDownloadUrl(this GgmlType type, QuantizationType quantizationType)
         {
-            GgmlType.Tiny => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin",
-            GgmlType.TinyEn => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin",
-            GgmlType.Base => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.bin",
-            GgmlType.BaseEn => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin",
-            GgmlType.Small => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-small.bin",
-            GgmlType.SmallEn => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin",
-            GgmlType.Medium => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin",
-            GgmlType.MediumEn => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin",
-            GgmlType.LargeV1 => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin",
-            GgmlType.Large => "https://huggingface.co/datasets/ggerganov/whisper.cpp/resolve/main/ggml-large.bin",
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
-        };
+            var subdirectory = GetQuantizationSubdirectory(quantizationType);
+            var modelName = type.ToFilename();
+            return $"https://huggingface.co/sandrohanea/whisper.net/resolve/v1/{subdirectory}/{modelName}";
+        }
+
+        public static string GetModelPath(GgmlType type, QuantizationType quantizationType)
+            => Path.Combine(DefaultPath, GetQuantizationSubdirectory(quantizationType), type.ToFilename());
 
         public static string ToFilename(this GgmlType type) => type switch
         {
@@ -54,5 +49,20 @@ namespace Drastic.Whisper
             GgmlType.Large => "0f4c8e34f21cf1a914c59d8b3ce882345ad349d6",
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
+
+        private static string GetQuantizationSubdirectory(QuantizationType quantization)
+        {
+            return quantization switch
+            {
+                QuantizationType.NoQuantization => "classic",
+                QuantizationType.Q4_0 => "q4_0",
+                QuantizationType.Q4_1 => "q4_1",
+                QuantizationType.Q4_2 => "q4_2",
+                QuantizationType.Q5_0 => "q5_0",
+                QuantizationType.Q5_1 => "q5_1",
+                QuantizationType.Q8_0 => "q8_0",
+                _ => throw new ArgumentOutOfRangeException(nameof(quantization), quantization, null)
+            };
+        }
     }
 }

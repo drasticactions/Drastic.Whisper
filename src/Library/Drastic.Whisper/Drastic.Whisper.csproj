@@ -12,9 +12,9 @@
 		<PackageReference Include="Drastic.Utilities" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 		<PackageReference Include="YoutubeExplode" />
-		<PackageReference Include="Whisper.net" />
+		<ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 	  <Compile Update="Translations\Common.Designer.cs">
 	    <DesignTime>True</DesignTime>
