@@ -23,15 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{DD2681A5-17E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drastic.PodcastWhisper", "Apps\Drastic.PodcastWhisper\Drastic.PodcastWhisper.csproj", "{E7AFD5FF-B38D-4621-A64E-522D9990CB11}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{EFB7141F-94F3-4F52-8F74-4BA907159185}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whisper.net", "..\external\whisper.net\Whisper.net\Whisper.net.csproj", "{F255241A-C275-4CD4-9A9B-1B1EE78AD227}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drastic.WhisperCLI", "Apps\Drastic.WhisperCLI\Drastic.WhisperCLI.csproj", "{75268D38-31DC-44E1-BC10-967AF5F8B60F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Drastic.WhisperCLI.Shared", "Apps\Drastic.WhisperCLI.Shared\Drastic.WhisperCLI.Shared.shproj", "{7E2EC342-7D22-4B1A-A03D-75C17951F3EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drastic.WhisperCLI.CoreML", "Apps\Drastic.WhisperCLI.CoreML\Drastic.WhisperCLI.CoreML.csproj", "{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,18 +67,10 @@ Global
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F255241A-C275-4CD4-9A9B-1B1EE78AD227}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75268D38-31DC-44E1-BC10-967AF5F8B60F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75268D38-31DC-44E1-BC10-967AF5F8B60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75268D38-31DC-44E1-BC10-967AF5F8B60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75268D38-31DC-44E1-BC10-967AF5F8B60F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,10 +78,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{458CB45F-8613-421A-BECE-1686A3D2BCD4} = {C8074A77-C193-45CD-A05B-D6C82DDF9292}
 		{E7AFD5FF-B38D-4621-A64E-522D9990CB11} = {DD2681A5-17E6-4952-B354-BBF7AF7B49EE}
-		{F255241A-C275-4CD4-9A9B-1B1EE78AD227} = {EFB7141F-94F3-4F52-8F74-4BA907159185}
 		{75268D38-31DC-44E1-BC10-967AF5F8B60F} = {DD2681A5-17E6-4952-B354-BBF7AF7B49EE}
 		{7E2EC342-7D22-4B1A-A03D-75C17951F3EA} = {DD2681A5-17E6-4952-B354-BBF7AF7B49EE}
-		{D1B22EF5-57AF-4DD8-99B6-EE8F5F9D179E} = {DD2681A5-17E6-4952-B354-BBF7AF7B49EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF18DEB7-2E2D-44FF-BAE2-960D46043A7C}
