@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DefineConstants Condition="$([MSBuild]::IsOSPlatform('osx'))">WHISPER_COREML</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +24,7 @@
     <ItemGroup Condition="$([MSBuild]::IsOSPlatform('osx')) == false">
         <PackageReference Include="Whisper.net.Runtime"/>
     </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Drastic.Media\Drastic.Media.csproj" />
     <ProjectReference Include="..\..\Library\Drastic.Whisper.FFMpeg\Drastic.Whisper.FFMpeg.csproj" />

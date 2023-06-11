@@ -92,11 +92,6 @@ internal class MainProgram
             filesCommand,
             podcastCommand,
         };
-
-        // Set the default command handler
-        #if DEBUG
-        this.root.Handler = CommandHandler.Create(LocalFiles);
-        #endif
     }
 
     private async Task Podcast(string model, string languageCode, string rss)
