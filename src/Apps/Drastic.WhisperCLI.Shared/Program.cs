@@ -17,6 +17,7 @@ using Drastic.Whisper;
 using Drastic.Whisper.Models;
 using Drastic.Whisper.Services;
 using Microsoft.Extensions.DependencyInjection;
+using NAudio.Wave;
 using Sharprompt;
 
 namespace Drastic.WhisperCLI;
@@ -94,12 +95,102 @@ internal class MainProgram
 
         benchmarkCommand.Add(new Option<string>("--modelFolder", "Whisper GGML Model Folder"));
         benchmarkCommand.Add(localLanguageOption);
+
+        var transcript = new Command("transcript")
+        {
+            Handler = CommandHandler.Create(Transcript),
+        };
+
+        transcript.Add(localModelOption);
+        transcript.Add(localLanguageOption);
         this.root = new RootCommand
         {
             filesCommand,
             podcastCommand,
             benchmarkCommand,
+            transcript,
         };
+    }
+
+    const int audioSampleLengthS = 1;
+    const int audioSampleLengthMs = audioSampleLengthS * 1000;
+    const int totalBufferLength = 30 / audioSampleLengthS;
+
+    private async Task Transcript(string model, string languageCode)
+    {
+        model = await this.GetModelPrompt(model);
+        var language = this.GetLanguagePrompt(languageCode);
+        List<float[]> slidingBuffer = new(totalBufferLength + 1);
+        var devices = new List<AudioDevices>();
+#if WINDOWS
+        for (int i = 0; i < WaveIn.DeviceCount; i++)
+        {
+            var capabilities = WaveIn.GetCapabilities(i);
+            devices.Add(new AudioDevices() { DeviceNumber = i, DeviceName = capabilities.ProductName });
+        }
+#endif
+        if (!devices.Any())
+        {
+            return;
+        }
+        var audioDevice = Prompt.Select("Select Audio Device", devices.Select(n => n.DeviceName));
+        var selectedDevice = devices.First(n => n.DeviceName == audioDevice)!;
+        var factory = global::Whisper.net.WhisperFactory.FromPath(model);
+        var processor = factory.CreateBuilder()
+            .WithLanguage("auto")
+            .WithSegmentEventHandler((e) =>
+            {
+                Console.WriteLine($"Segment: {e.Text}");
+            })
+            .Build();
+
+        WaveInEvent waveIn = new()
+        {
+            DeviceNumber = selectedDevice.DeviceNumber, // indicates which microphone to use
+            WaveFormat = new WaveFormat(rate: 16000, bits: 16, channels: 1), // must be supported by the microphone
+            BufferMilliseconds = audioSampleLengthMs,
+        };
+
+        waveIn.DataAvailable += WaveInDataAvailable;
+        waveIn.StartRecording();
+
+        void WaveInDataAvailable(object? sender, WaveInEventArgs e)
+        {
+            var values = new short[e.Buffer.Length / 2];
+            Buffer.BlockCopy(e.Buffer, 0, values, 0, e.Buffer.Length);
+            var samples = values.Select(x => x / (short.MaxValue + 1f)).ToArray();
+
+            var silenceCount = samples.Count(x => IsSilence(x, -40));
+
+            if (silenceCount < values.Length - values.Length / 12)
+            {
+                slidingBuffer.Add(samples);
+
+                if (slidingBuffer.Count > totalBufferLength)
+                {
+                    slidingBuffer.RemoveAt(0);
+                }
+
+                processor.Process(slidingBuffer.SelectMany(x => x).ToArray());
+            }
+        }
+
+        Console.WriteLine("Press any key to quit.");
+        Console.ReadLine();
+    }
+
+    static bool IsSilence(float amplitude, sbyte threshold)
+    => GetDecibelsFromAmplitude(amplitude) < threshold;
+
+    static double GetDecibelsFromAmplitude(float amplitude)
+        => 20 * Math.Log10(Math.Abs(amplitude));
+
+
+    private class AudioDevices
+    {
+        public int DeviceNumber { get; set; }
+
+        public string DeviceName { get; set; } = string.Empty;
     }
 
     private async Task Podcast(string model, string languageCode, string rss)
@@ -211,7 +302,7 @@ internal class MainProgram
             var e = segment.Segment;
             Console.WriteLine($"CSSS {e.Start} ==> {e.End} : {e.Text}");
             var item = new SrtSubtitleLine()
-                { Start = e.Start, End = e.End, Text = e.Text.Trim(), LineNumber = subtitles };
+            { Start = e.Start, End = e.End, Text = e.Text.Trim(), LineNumber = subtitles };
             writer.WriteLine(item.ToString());
             writer.Flush();
         }

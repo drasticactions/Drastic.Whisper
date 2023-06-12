@@ -3,7 +3,7 @@
   <Import Condition="$([MSBuild]::IsOSPlatform('osx'))" Project="..\..\..\external\Whisper.net\Whisper.net.Runtime.CoreML\Whisper.net.Runtime.CoreML.targets" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0-windows;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DefineConstants Condition="$([MSBuild]::IsOSPlatform('osx'))">WHISPER_COREML</DefineConstants>
@@ -13,8 +13,9 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Drastic.Utilities" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="NAudio" />
     <PackageReference Include="Sharprompt" />
-    <PackageReference Include="System.CommandLine"/>
+    <PackageReference Include="System.CommandLine" />
     <PackageReference Include="System.CommandLine.DragonFruit" />
     <ProjectReference Include="..\..\..\external\whisper.net\Whisper.net\Whisper.net.csproj" />
   </ItemGroup>

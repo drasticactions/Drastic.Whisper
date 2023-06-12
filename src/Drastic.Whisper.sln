@@ -21,11 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drastic.Media", "Library\Dr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{DD2681A5-17E6-4952-B354-BBF7AF7B49EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drastic.WhisperCLI", "Apps\Drastic.WhisperCLI\Drastic.WhisperCLI.csproj", "{75268D38-31DC-44E1-BC10-967AF5F8B60F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drastic.WhisperCLI", "Apps\Drastic.WhisperCLI\Drastic.WhisperCLI.csproj", "{75268D38-31DC-44E1-BC10-967AF5F8B60F}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Drastic.WhisperCLI.Shared", "Apps\Drastic.WhisperCLI.Shared\Drastic.WhisperCLI.Shared.shproj", "{7E2EC342-7D22-4B1A-A03D-75C17951F3EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whisper.net", "..\external\whisper.net\Whisper.net\Whisper.net.csproj", "{EDD922D9-331D-4D59-A31F-615D7105E645}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whisper.net", "..\external\whisper.net\Whisper.net\Whisper.net.csproj", "{EDD922D9-331D-4D59-A31F-615D7105E645}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{55EFD75F-ADFD-44FC-9202-987964B4B2A6}"
 EndProject
@@ -85,5 +85,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF18DEB7-2E2D-44FF-BAE2-960D46043A7C}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Apps\Drastic.WhisperCLI.Shared\Drastic.WhisperCLI.Shared.projitems*{75268d38-31dc-44e1-bc10-967af5f8b60f}*SharedItemsImports = 5
+		Apps\Drastic.WhisperCLI.Shared\Drastic.WhisperCLI.Shared.projitems*{7e2ec342-7d22-4b1a-a03d-75c17951f3ea}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

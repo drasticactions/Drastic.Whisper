@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Drastic.WhisperCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "transcript"
+    }
+  }
+}
